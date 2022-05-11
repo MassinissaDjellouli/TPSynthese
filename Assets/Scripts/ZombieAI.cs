@@ -7,6 +7,8 @@ public class ZombieAI : MonoBehaviour
 
     private Animator anim;
     private GameObject player = null;
+    private bool isHitting = false;
+
 
     public int zombieHp = 6;
     public float movementSpeed = 10f;
@@ -21,27 +23,16 @@ public class ZombieAI : MonoBehaviour
 
     void Update()
     {
-
-        //the next four lines allows the zombie to face the player
-        Vector3 targetDirection = player.transform.position - transform.position;
-        float singleStep = speed * Time.deltaTime;
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
-        transform.rotation = Quaternion.LookRotation(newDirection);
-
-        //Makes the zombie move towards the player
-        stopAllAnimation();
-        anim.SetBool("isRunning", true);
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
-
-
-        //TEMPORARY cant make the colliders work so im using this instead
-        if (transform.position == player.transform.position)
+        if (isHitting)
         {
-           Debug.Log("Zombie is hitting the player");
-           stopAllAnimation();
-           anim.SetBool("Attack", true);
-
+            Debug.Log("Zombie is hitting the player");
+            stopAllAnimation();
+            anim.SetBool("Attack", true);
         }
+        else {
+            move();
+        }
+        
 
     }
 
@@ -51,9 +42,32 @@ public class ZombieAI : MonoBehaviour
         anim.SetBool("isRunning", false);
     }
 
+    public void move()
+    {
+        //the next four lines allows the zombie to face the player
+        Vector3 targetDirection = player.transform.position - transform.position;
+        float singleStep = speed * Time.deltaTime;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDirection);
+
+        //Makes the zombie move towards the player
+        stopAllAnimation();
+        anim.SetBool("isRunning", true);
+
+
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         //cant make this work HELP
+        if (other.CompareTag("Player")) {
+            isHitting = true;
+        }
+
+        //else if other.CompareTag("Bullet") then stopAllAnimation(); anim.SetBool("isDead", true);
+
     }
 
 
