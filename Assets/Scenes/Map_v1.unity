@@ -12092,7 +12092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5497273522055681010, guid: cefcdb88d845cc3478e76a1cda99974c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.48
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5497273522055681010, guid: cefcdb88d845cc3478e76a1cda99974c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12128,7 +12128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7364500696568718732, guid: cefcdb88d845cc3478e76a1cda99974c, type: 3}
       propertyPath: playerHeight
-      value: 3.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7364500696568718732, guid: cefcdb88d845cc3478e76a1cda99974c, type: 3}
       propertyPath: mouseSensitivity
@@ -12784,6 +12784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieHp: 6
   movementSpeed: 1
+  speed: 1
 --- !u!1001 &1111245556
 PrefabInstance:
   m_ObjectHideFlags: 0

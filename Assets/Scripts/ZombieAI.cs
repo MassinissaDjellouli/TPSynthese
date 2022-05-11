@@ -22,31 +22,26 @@ public class ZombieAI : MonoBehaviour
     void Update()
     {
 
-
+        //the next four lines allows the zombie to face the player
         Vector3 targetDirection = player.transform.position - transform.position;
         float singleStep = speed * Time.deltaTime;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
 
-
+        //Makes the zombie move towards the player
+        stopAllAnimation();
         anim.SetBool("isRunning", true);
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
+
 
         //TEMPORARY cant make the colliders work so im using this instead
         if (transform.position == player.transform.position)
         {
-           // Debug.Log("Impact");
-           // stopAllAnimation();
-           // anim.SetBool("Attack", true);
+           Debug.Log("Zombie is hitting the player");
+           stopAllAnimation();
+           anim.SetBool("Attack", true);
 
         }
-        else
-        {
-          //  Debug.Log("runnin runnin runnin");
-          //  anim.SetBool("isRunning", true);
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
-        }
-
 
     }
 
@@ -58,7 +53,7 @@ public class ZombieAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
+        //cant make this work HELP
     }
 
 
