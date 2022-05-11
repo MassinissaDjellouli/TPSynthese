@@ -18,7 +18,6 @@ public class ZombieAI : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
-
     }
 
     void Update()
@@ -32,10 +31,7 @@ public class ZombieAI : MonoBehaviour
         else {
             move();
         }
-        
-
     }
-
 
     public void stopAllAnimation() {
         anim.SetBool("Attack", false);
@@ -53,15 +49,12 @@ public class ZombieAI : MonoBehaviour
         //Makes the zombie move towards the player
         stopAllAnimation();
         anim.SetBool("isRunning", true);
-
-
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        //cant make this work HELP
         if (other.CompareTag("Player")) {
             isHitting = true;
         }
