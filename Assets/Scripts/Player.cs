@@ -9,11 +9,18 @@ public class Player : MonoBehaviour
     public float playerHeight = 3.5f;
     float currentXRot = 0;
     float currentYRot = 0;
+    public GameObject gunAsset;
+    public Camera cam;
+    Gun gun;
     // Start is called before the first frame update
     void Start()
     {
         //Lock le curseur en place
         Cursor.lockState = CursorLockMode.Locked;
+        GameObject child = Instantiate(gunAsset,cam.transform.position + new Vector3(1,-1,1.7f),Quaternion.identity);
+        child.transform.parent = cam.transform;
+
+        gun = child.GetComponent<Gun>();
     }
 
     // Update is called once per frame
@@ -21,6 +28,15 @@ public class Player : MonoBehaviour
     {
         HeadRotation();
         Move();
+        ShootGun();
+    }
+
+    void ShootGun()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            gun.Shoot();
+        }
     }
 
     void Move()
@@ -46,7 +62,7 @@ public class Player : MonoBehaviour
         //localrotation: rotation de l'objet en relation avec son parent
 
         currentYRot += sourisX;
-        Debug.Log(currentYRot);
-        transform.localRotation = Quaternion.Euler(currentXRot, currentYRot, 0);
+        transform.localRotation = Quaternion.Euler(0, currentYRot, 0);
+        cam.transform.localRotation = Quaternion.Euler(currentXRot, 0, 0);
     }
 }
