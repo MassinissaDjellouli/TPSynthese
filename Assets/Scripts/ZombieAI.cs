@@ -7,6 +7,8 @@ public class ZombieAI : MonoBehaviour
 
     private Animator anim;
     private GameObject player = null;
+    private bool isHitting = false;
+
 
     public int zombieHp = 6;
     public float movementSpeed = 10f;
@@ -16,12 +18,28 @@ public class ZombieAI : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
-
     }
 
     void Update()
     {
+        if (isHitting)
+        {
+            Debug.Log("Zombie is hitting the player");
+            stopAllAnimation();
+            anim.SetBool("Attack", true);
+        }
+        else {
+            move();
+        }
+    }
 
+    public void stopAllAnimation() {
+        anim.SetBool("Attack", false);
+        anim.SetBool("isRunning", false);
+    }
+
+    public void move()
+    {
         //the next four lines allows the zombie to face the player
         Vector3 targetDirection = player.transform.position - transform.position;
         float singleStep = speed * Time.deltaTime;
@@ -32,28 +50,18 @@ public class ZombieAI : MonoBehaviour
         stopAllAnimation();
         anim.SetBool("isRunning", true);
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
+    }
 
 
-        //TEMPORARY cant make the colliders work so im using this instead
-        if (transform.position == player.transform.position)
-        {
-           Debug.Log("Zombie is hitting the player");
-           stopAllAnimation();
-           anim.SetBool("Attack", true);
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player") {
+            Debug.Log("Hit");
+            isHitting = true;
         }
 
-    }
+        //else if other.CompareTag("Bullet") then stopAllAnimation(); anim.SetBool("isDead", true);
 
-
-    public void stopAllAnimation() {
-        anim.SetBool("Attack", false);
-        anim.SetBool("isRunning", false);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //cant make this work HELP
     }
 
 
