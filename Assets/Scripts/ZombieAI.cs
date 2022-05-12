@@ -53,9 +53,10 @@ public class ZombieAI : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player")) {
+        if (collision.gameObject.tag == "Player") {
+            Debug.Log("Hit");
             isHitting = true;
         }
 
