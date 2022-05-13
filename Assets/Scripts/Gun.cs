@@ -7,35 +7,56 @@ public class Gun : MonoBehaviour
     public int RPM = 30;
     public int AMMO_COUNT = 30;
     public int TOTAL_AMMO = 150;
-
+    public Canvas aimingHUD;
+    
     int currentTotalAmmo;
     int currentAmmo = 0;
-
-     float shootCountDown = 0;
+    float shootCountDown = 0;
+    bool aiming = false;
     public ParticleSystem muzzleFlash;
+    Animator animator;
+    public Transform camera;
+    public Bullet bullet;
+    public Transform canon;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         currentTotalAmmo = TOTAL_AMMO;
+        aimingHUD.enabled = false;
         Reload();
     }
 
     // Update is called once per frame
     void Update()
     {
+        transform.rotation = camera.transform.rotation; 
         if(shootCountDown > 0)
         {
             shootCountDown -= Time.deltaTime;
             //Fait en sorte que le countdown reste plus grand que 0
             shootCountDown = Mathf.Max(shootCountDown, 0);
         }
-        if (Input.GetKeyDown(KeyCode.R))
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ReloadFinished"))
         {
-            Reload();
+            animator.ResetTrigger("isReloading");
         }
     }
+
+    public void StopAim()
+    {
+        aiming = false;
+        aimingHUD.enabled = false;
+        GetComponent<MeshRenderer>().enabled = true;
+    }
+
     public void Shoot()
     {
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ReloadIdle"))
+        {
+            return;
+        }
         if(currentAmmo == 0)
         {
             return;
@@ -46,12 +67,20 @@ public class Gun : MonoBehaviour
         }
         currentAmmo--;
         shootCountDown = (60f/RPM);
-        muzzleFlash.startRotation = Random.RandomRange(0, 180);
-        muzzleFlash.Play();
+        if (!aiming)
+        {
+            muzzleFlash.startRotation = Random.RandomRange(0, 180);
+            muzzleFlash.Play();
+        }
+        Instantiate(bullet,canon.position,Quaternion.identity);
         Debug.Log("Shootin");
     }
     public void Reload()
     {
+        if(currentAmmo == AMMO_COUNT)
+        {
+            return;
+        }
         if(currentTotalAmmo == 0)
         {
             return;
@@ -62,7 +91,18 @@ public class Gun : MonoBehaviour
             currentTotalAmmo = 0;
             return;
         }
+        animator.SetTrigger("isReloading");
         currentTotalAmmo -= AMMO_COUNT - currentAmmo;
         currentAmmo = AMMO_COUNT;
+    }
+    public void Aim()
+    {
+        if (!aiming)
+        {
+            aimingHUD.enabled = true;
+            GetComponent<MeshRenderer>().enabled = false;
+            aiming = true;
+            Debug.Log("aimin");
+        }
     }
 }
