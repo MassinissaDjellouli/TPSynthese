@@ -6,8 +6,9 @@ public class ZombieAI : MonoBehaviour
 {
 
     private Animator anim;
-    private GameObject player = null;
+    private GameObject player;
     private bool isHitting = false;
+    private bool isAlive = true;
 
 
     public int zombieHp = 6;
@@ -28,8 +29,13 @@ public class ZombieAI : MonoBehaviour
             stopAllAnimation();
             anim.SetBool("Attack", true);
         }
-        else {
-            move();
+        else if (isAlive) {
+             move();
+            Vector3 targetDirection = player.transform.position - transform.position;
+            float singleStep = speed * Time.deltaTime;
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+            transform.rotation = Quaternion.LookRotation(newDirection);
+
         }
     }
 
@@ -56,11 +62,16 @@ public class ZombieAI : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player") {
-            Debug.Log("Hit");
+            Debug.Log("Hit player");
             isHitting = true;
+        } else if(collision.gameObject.tag == "Bullet") {
+            Debug.Log("Hit gun");
+            isAlive = false;
+            stopAllAnimation(); 
+            anim.SetBool("isDead", true);
         }
 
-        //else if other.CompareTag("Bullet") then stopAllAnimation(); anim.SetBool("isDead", true);
+        //else if other.CompareTag("Bullet") then
 
     }
 

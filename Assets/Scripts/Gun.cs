@@ -16,7 +16,7 @@ public class Gun : MonoBehaviour
     public ParticleSystem muzzleFlash;
     Animator animator;
     public Transform camera;
-    public Bullet bullet;
+    public GameObject bullet;
     public Transform canon;
     // Start is called before the first frame update
     void Start()
