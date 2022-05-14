@@ -5866,7 +5866,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 8
+  m_Constraints: 72
   m_CollisionDetection: 0
 --- !u!1 &347604631 stripped
 GameObject:
@@ -23239,7 +23239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2338685719157711071, guid: ab1c81a008387e844baa49687e95b18a, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2371403112420948582, guid: ab1c81a008387e844baa49687e95b18a, type: 3}
       propertyPath: m_TagString
@@ -23255,7 +23255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8910834456196587308, guid: ab1c81a008387e844baa49687e95b18a, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab1c81a008387e844baa49687e95b18a, type: 3}
