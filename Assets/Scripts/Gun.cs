@@ -40,16 +40,13 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
         score.text = Menu.score.ToString();
         currentAmmoText.text = currentAmmo.ToString();
         totalAmmoText.text = currentTotalAmmo.ToString();
         transform.rotation = camera.transform.rotation;
         if (shootCountDown > 0)
-=======
-        transform.rotation = transform.rotation; 
-        if(shootCountDown > 0)
->>>>>>> 4ac4ccebff49f968e016f25cacfe0a41a1affb4d
+            transform.rotation = transform.rotation;
+        if (shootCountDown > 0)
         {
             shootCountDown -= Time.deltaTime;
             //Fait en sorte que le countdown reste plus grand que 0

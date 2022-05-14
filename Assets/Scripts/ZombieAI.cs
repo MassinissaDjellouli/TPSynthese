@@ -92,7 +92,7 @@ public class ZombieAI : MonoBehaviour
             Object.Destroy(gameObject, 3.0f);
             collider = gameObject.GetComponent<Collider>();
             collider.enabled = false;
-            Menu.score += 10;
+            Menu.score += 10;w
         }
 
 
