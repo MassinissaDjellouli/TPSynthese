@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 100
+  scoreText: {fileID: 0}
   maxDistance: 2000
   beginDelay: 0.1
 --- !u!54 &810906546032701126

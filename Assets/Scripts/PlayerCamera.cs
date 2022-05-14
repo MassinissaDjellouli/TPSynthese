@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
+    public static int score = 0;
     public float mouseSensitivity = 300f;
     float currentXRot = 0;
     float currentYRot = 0;
@@ -27,7 +28,7 @@ public class PlayerCamera : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(currentXRot, currentYRot, 0f);
         body.rotation = Quaternion.Euler(0, currentYRot, 0f);
-        
+
         body.Rotate(Vector3.up * sourisX);
     }
 

@@ -1372,6 +1372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4378ddfd6af2b4985d3de8ba0ba4d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
   zombieHp: 6
   movementSpeed: 10
   speed: 1

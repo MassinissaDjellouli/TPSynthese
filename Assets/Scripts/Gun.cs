@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Gun : MonoBehaviour
 {
     public int RPM = 30;
     public int AMMO_COUNT = 30;
     public int TOTAL_AMMO = 150;
     public Canvas aimingHUD;
-    
+
+    public Text currentAmmoText;
+    public Text totalAmmoText;
+
+    public Text score;
+
     int currentTotalAmmo;
     int currentAmmo = 0;
     float shootCountDown = 0;
@@ -30,8 +35,11 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = camera.transform.rotation; 
-        if(shootCountDown > 0)
+        score.text = Menu.score.ToString();
+        currentAmmoText.text = currentAmmo.ToString();
+        totalAmmoText.text = currentTotalAmmo.ToString();
+        transform.rotation = camera.transform.rotation;
+        if (shootCountDown > 0)
         {
             shootCountDown -= Time.deltaTime;
             //Fait en sorte que le countdown reste plus grand que 0
@@ -57,35 +65,35 @@ public class Gun : MonoBehaviour
         {
             return;
         }
-        if(currentAmmo == 0)
+        if (currentAmmo == 0)
         {
             return;
         }
-        if(shootCountDown > 0)
+        if (shootCountDown > 0)
         {
             return;
         }
         currentAmmo--;
-        shootCountDown = (60f/RPM);
+        shootCountDown = (60f / RPM);
         if (!aiming)
         {
             muzzleFlash.startRotation = Random.RandomRange(0, 180);
             muzzleFlash.Play();
         }
-        Instantiate(bullet,canon.position,Quaternion.identity);
+        Instantiate(bullet, canon.position, Quaternion.identity);
         Debug.Log("Shootin");
     }
     public void Reload()
     {
-        if(currentAmmo == AMMO_COUNT)
+        if (currentAmmo == AMMO_COUNT)
         {
             return;
         }
-        if(currentTotalAmmo == 0)
+        if (currentTotalAmmo == 0)
         {
             return;
         }
-        if(currentTotalAmmo < AMMO_COUNT - currentAmmo)
+        if (currentTotalAmmo < AMMO_COUNT - currentAmmo)
         {
             currentAmmo += currentTotalAmmo;
             currentTotalAmmo = 0;

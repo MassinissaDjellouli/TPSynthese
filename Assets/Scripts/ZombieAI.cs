@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ZombieAI : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class ZombieAI : MonoBehaviour
     private bool isAlive = true;
     private Vector3 capturedPos;
 
+    public Text scoreText;
+
+    private Collider collider;
 
     public int zombieHp = 6;
     public float movementSpeed = 10f;
@@ -30,11 +34,13 @@ public class ZombieAI : MonoBehaviour
             Debug.Log("Zombie is hitting the player");
             stopAllAnimation();
             anim.SetBool("Attack", true);
-            if (capturedPos != transform.position) {
+            if (capturedPos != transform.position)
+            {
                 isHitting = false;
             }
         }
-        else if (isAlive) {
+        else if (isAlive)
+        {
 
             //return;
 
@@ -49,7 +55,8 @@ public class ZombieAI : MonoBehaviour
     }
 
 
-    public void stopAllAnimation() {
+    public void stopAllAnimation()
+    {
         anim.SetBool("Attack", false);
         anim.SetBool("isRunning", false);
     }
@@ -70,17 +77,25 @@ public class ZombieAI : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player") {
+        if (collision.gameObject.tag == "Player")
+        {
             Debug.Log("Hit player");
             isHitting = true;
             capturedPos = player.transform.position;
-        } else if(collision.gameObject.tag == "Bullet") {
-            Debug.Log("Hit gun");
-            isAlive = false;
-            stopAllAnimation(); 
-            anim.SetBool("isDead", true);
-            Object.Destroy(gameObject, 5.0f);
         }
+        else if (collision.gameObject.tag == "Bullet")
+        {
+            Debug.Log("Hit gun");
+            stopAllAnimation();
+            isAlive = false;
+            anim.SetBool("isDead", true);
+            Object.Destroy(gameObject, 3.0f);
+            collider = gameObject.GetComponent<Collider>();
+            collider.enabled = false;
+            Menu.score += 10;
+        }
+
+
 
         //else if other.CompareTag("Bullet") then
 

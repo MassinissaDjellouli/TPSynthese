@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 3.680476, y: 3.671479, z: 3.6851153}
   m_Children: []
   m_Father: {fileID: 5189467000380930625}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -3.253, y: 4.875, z: -0.277}
 --- !u!1 &1158058546367254762
 GameObject:
@@ -5232,6 +5232,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1.7373, z: 1}
   m_Children:
+  - {fileID: 8773959061830950904}
   - {fileID: 6361476570605149082}
   - {fileID: 5189467000380930625}
   m_Father: {fileID: 3347276831522759905}
@@ -5333,8 +5334,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 9014159077411289009}
-  m_Father: {fileID: 5189467000380930625}
-  m_RootOrder: 1
+  m_Father: {fileID: 7288350616460596930}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5431,7 +5432,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.57560587, z: 1}
   m_Children: []
   m_Father: {fileID: 7288350616460596930}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &8064352715689049481
 Camera:
@@ -5508,10 +5509,9 @@ Transform:
   m_LocalScale: {x: 0.27172, y: 0.15640362, z: 0.27172}
   m_Children:
   - {fileID: 3944937481306970324}
-  - {fileID: 8773959061830950904}
   - {fileID: 8771713628366140918}
   m_Father: {fileID: 7288350616460596930}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 3.265, y: 11.928, z: 0}
 --- !u!33 &4457674226333495224
 MeshFilter:
@@ -5597,6 +5597,8 @@ MonoBehaviour:
   AMMO_COUNT: 30
   TOTAL_AMMO: 150
   aimingHUD: {fileID: 1962631323517395175}
+  currentAmmoText: {fileID: 0}
+  totalAmmoText: {fileID: 0}
   muzzleFlash: {fileID: 7404457791077586636}
   camera: {fileID: 7288350616460596930}
   bullet: {fileID: 6221259913658327840, guid: 1cb6de0147fb1604d953f45e89c5db01, type: 3}

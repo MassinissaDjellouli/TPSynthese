@@ -15,4 +15,6 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 
+    public static int score;
+
 }

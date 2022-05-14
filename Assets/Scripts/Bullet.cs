@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     Transform canon;
     Vector3 direction;
     PlayerActions player;
+
     public float maxDistance = 2000f;
     public float beginDelay = 1;
     Rigidbody rb;
@@ -25,14 +26,14 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(beginDelay > 0)
+        if (beginDelay > 0)
         {
             beginDelay -= Time.deltaTime;
             return;
         }
         rb.constraints = RigidbodyConstraints.None;
         transform.Translate(direction * movementSpeed * Time.deltaTime);
-        if(getPlayerDistance() > maxDistance)
+        if (getPlayerDistance() > maxDistance)
         {
             Debug.Log(getPlayerDistance());
             Destroy(gameObject);
@@ -41,9 +42,14 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag != "Weapon" && collision.gameObject.tag != "Player")
+        if (collision.gameObject.tag != "Weapon" && collision.gameObject.tag != "Player")
         {
             Destroy(gameObject);
+        }
+
+        if (collision.gameObject.tag != "Zombie" && collision.gameObject.tag != "Player")
+        {
+
         }
     }
     private float getPlayerDistance()
