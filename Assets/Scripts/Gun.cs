@@ -18,6 +18,9 @@ public class Gun : MonoBehaviour
     public Transform camera;
     public GameObject bullet;
     public Transform canon;
+
+    Vector3 aimingPos;
+    Vector3 initPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,12 +28,14 @@ public class Gun : MonoBehaviour
         currentTotalAmmo = TOTAL_AMMO;
         aimingHUD.enabled = false;
         Reload();
+        aimingPos = new Vector3(0, -0.055f, 0.475f);
+        initPos = new Vector3(0.374f, -0.149f, 0.415f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = camera.transform.rotation; 
+        transform.rotation = transform.rotation; 
         if(shootCountDown > 0)
         {
             shootCountDown -= Time.deltaTime;
@@ -46,6 +51,7 @@ public class Gun : MonoBehaviour
 
     public void StopAim()
     {
+        animator.ResetTrigger("isAiming");
         aiming = false;
         aimingHUD.enabled = false;
         GetComponent<MeshRenderer>().enabled = true;
@@ -53,7 +59,8 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ReloadIdle"))
+        Debug.Log("test");
+        if (!(animator.GetCurrentAnimatorStateInfo(0).IsName("IdleState") || animator.GetCurrentAnimatorStateInfo(0).IsName("Aiming")))
         {
             return;
         }
@@ -91,6 +98,7 @@ public class Gun : MonoBehaviour
             currentTotalAmmo = 0;
             return;
         }
+        StopAim();
         animator.SetTrigger("isReloading");
         currentTotalAmmo -= AMMO_COUNT - currentAmmo;
         currentAmmo = AMMO_COUNT;
@@ -101,6 +109,7 @@ public class Gun : MonoBehaviour
         {
             aimingHUD.enabled = true;
             GetComponent<MeshRenderer>().enabled = false;
+            animator.SetTrigger("isAiming");
             aiming = true;
             Debug.Log("aimin");
         }
