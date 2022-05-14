@@ -378,7 +378,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &8771713629121612618
+--- !u!1001 &2011430544
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -387,7 +387,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1158058546367254762, guid: ab1c81a008387e844baa49687e95b18a, type: 3}
       propertyPath: m_Name
-      value: Player 2
+      value: Player 2 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8771713629605980488, guid: ab1c81a008387e844baa49687e95b18a, type: 3}
       propertyPath: m_RootOrder
