@@ -118,7 +118,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8771713629605980488}
-  - component: {fileID: 4733384394087619698}
   - component: {fileID: 4378972358758977726}
   - component: {fileID: 3279272364176091593}
   - component: {fileID: 8459192970999755446}
@@ -137,7 +136,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158058546367254762}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.1756897, y: 11.188364, z: -3.1714454}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4902184578165494233}
@@ -145,19 +144,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4733384394087619698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158058546367254762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58ce8d439cf70e745bf626f4e43a9f95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gun: {fileID: 4025809873227913811}
 --- !u!54 &4378972358758977726
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -227,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ce8d439cf70e745bf626f4e43a9f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 4034527127620816806, guid: 55196358fd1f01445aa33e98bfee6702, type: 3}
+  gun: {fileID: 4025809873227913811}
 --- !u!1 &1594015520210151595
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,8 +414,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2371403112420948582}
-  m_LocalRotation: {x: -0.0000959382, y: 0.0000032510889, z: 0.008727246, w: 0.9999619}
-  m_LocalPosition: {x: -3.329836, y: -4.415782, z: -7.478908}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9133970726181009853}
@@ -6028,13 +6014,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 760f39d032d43df4188dfdf9386cb3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RPM: 30
+  RPM: 500
   AMMO_COUNT: 30
   TOTAL_AMMO: 150
   aimingHUD: {fileID: 1962631323517395175}
-  currentAmmoText: {fileID: 272861422018861378}
-  totalAmmoText: {fileID: 6131780047296163905}
-  score: {fileID: 3840276272497313786}
   muzzleFlash: {fileID: 7404457791077586636}
   camera: {fileID: 7288350616460596930}
   bullet: {fileID: 6221259913658327840, guid: 1cb6de0147fb1604d953f45e89c5db01, type: 3}

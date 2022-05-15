@@ -15,6 +15,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            Debug.Log("shot");
             gun.Shoot();
         }
         if (Input.GetKeyDown(KeyCode.R))

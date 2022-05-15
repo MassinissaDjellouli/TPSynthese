@@ -1,31 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 public class Gun : MonoBehaviour
 {
-    public int RPM = 30;
+    public int RPM = 500;
     public int AMMO_COUNT = 30;
     public int TOTAL_AMMO = 150;
     public Canvas aimingHUD;
-
-    public Text currentAmmoText;
-    public Text totalAmmoText;
-
-    public Text score;
-
+    
     int currentTotalAmmo;
     int currentAmmo = 0;
     float shootCountDown = 0;
     bool aiming = false;
-    public ParticleSystem muzzleFlash;
     Animator animator;
+    List<GameObject> bullets = new List<GameObject>();
+
+    public ParticleSystem muzzleFlash;
     public Transform camera;
     public GameObject bullet;
     public Transform canon;
 
-    Vector3 aimingPos;
-    Vector3 initPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,20 +28,15 @@ public class Gun : MonoBehaviour
         currentTotalAmmo = TOTAL_AMMO;
         aimingHUD.enabled = false;
         Reload();
-        aimingPos = new Vector3(0, -0.055f, 0.475f);
-        initPos = new Vector3(0.374f, -0.149f, 0.415f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        score.text = Menu.score.ToString();
-        currentAmmoText.text = currentAmmo.ToString();
-        totalAmmoText.text = currentTotalAmmo.ToString();
-        transform.rotation = camera.transform.rotation;
-        if (shootCountDown > 0)
+        DestroyOldBullets();
+        transform.rotation = transform.rotation; 
+        if(shootCountDown > 0)
         {
-            transform.rotation = transform.rotation;
             shootCountDown -= Time.deltaTime;
             //Fait en sorte que le countdown reste plus grand que 0
             shootCountDown = Mathf.Max(shootCountDown, 0);
@@ -66,42 +56,64 @@ public class Gun : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = true;
     }
 
+    void DestroyOldBullets()
+    {
+        float maxDistance = 1000;
+        for(int i = 0; i < bullets.Count; i++)
+        {
+
+            if(getPlayerDistance(bullets[i]) > maxDistance)
+            {
+                GameObject bullet = bullets[i];
+                bullets.RemoveAt(i);
+                Destroy(bullet);
+            }   
+        }
+        
+    }
+    private float getPlayerDistance(GameObject objet)
+    {
+        PlayerActions player = FindObjectOfType<PlayerActions>();
+        Vector3 dist = objet.transform.position - player.transform.position;
+        return dist.magnitude;
+    }
+
     public void Shoot()
     {
-        Debug.Log("test");
+        Debug.Log(animator);
         if (!(animator.GetCurrentAnimatorStateInfo(0).IsName("IdleState") || animator.GetCurrentAnimatorStateInfo(0).IsName("Aiming")))
         {
             return;
         }
-        if (currentAmmo == 0)
+        if(currentAmmo == 0)
         {
             return;
         }
-        if (shootCountDown > 0)
+        if(shootCountDown > 0)
         {
             return;
         }
         currentAmmo--;
-        shootCountDown = (60f / RPM);
+        shootCountDown = (60f/RPM);
         if (!aiming)
         {
             muzzleFlash.startRotation = Random.RandomRange(0, 180);
             muzzleFlash.Play();
         }
-        Instantiate(bullet, canon.position, Quaternion.identity);
+        bullets.Add(Instantiate(bullet,canon.position,Quaternion.identity));
         Debug.Log("Shootin");
     }
     public void Reload()
     {
-        if (currentAmmo == AMMO_COUNT)
+        if(currentAmmo == AMMO_COUNT)
         {
             return;
         }
-        if (currentTotalAmmo == 0)
+        if(currentTotalAmmo == 0)
         {
             return;
         }
-        if (currentTotalAmmo < AMMO_COUNT - currentAmmo)
+        if(currentTotalAmmo < AMMO_COUNT - currentAmmo)
         {
             currentAmmo += currentTotalAmmo;
             currentTotalAmmo = 0;

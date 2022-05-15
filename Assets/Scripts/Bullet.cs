@@ -20,7 +20,6 @@ public class Bullet : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezePosition;
         canon = FindObjectOfType<Gun>().canon.transform;
         direction = canon.forward;
-        player = FindObjectOfType<PlayerActions>();
     }
 
     // Update is called once per frame
@@ -33,18 +32,12 @@ public class Bullet : MonoBehaviour
         }
         rb.constraints = RigidbodyConstraints.None;
         transform.Translate(direction * movementSpeed * Time.deltaTime);
-        if (getPlayerDistance() > maxDistance)
-        {
-            Debug.Log(getPlayerDistance());
-            Destroy(gameObject);
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag != "Weapon" && collision.gameObject.tag != "Player")
         {
-            Destroy(gameObject);
         }
 
         if (collision.gameObject.tag != "Zombie" && collision.gameObject.tag != "Player")
@@ -52,9 +45,5 @@ public class Bullet : MonoBehaviour
 
         }
     }
-    private float getPlayerDistance()
-    {
-        Vector3 dist = transform.position - player.transform.position;
-        return dist.magnitude;
-    }
+
 }
