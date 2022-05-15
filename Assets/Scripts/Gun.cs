@@ -45,9 +45,8 @@ public class Gun : MonoBehaviour
         totalAmmoText.text = currentTotalAmmo.ToString();
         transform.rotation = camera.transform.rotation;
         if (shootCountDown > 0)
-            transform.rotation = transform.rotation;
-        if (shootCountDown > 0)
         {
+            transform.rotation = transform.rotation;
             shootCountDown -= Time.deltaTime;
             //Fait en sorte que le countdown reste plus grand que 0
             shootCountDown = Mathf.Max(shootCountDown, 0);

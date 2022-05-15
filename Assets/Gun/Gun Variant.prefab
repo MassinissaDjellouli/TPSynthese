@@ -4899,7 +4899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 33269b2b610f4c245a712795c1927939, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 33269b2b610f4c245a712795c1927939, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4960,9 +4960,12 @@ MonoBehaviour:
   AMMO_COUNT: 30
   TOTAL_AMMO: 150
   aimingHUD: {fileID: 1721947064904100309}
+  currentAmmoText: {fileID: 0}
+  totalAmmoText: {fileID: 0}
+  score: {fileID: 0}
   muzzleFlash: {fileID: 3576977626921659851}
   camera: {fileID: 0}
-  bullet: {fileID: 0}
+  bullet: {fileID: 6221259913658327840, guid: 1cb6de0147fb1604d953f45e89c5db01, type: 3}
   canon: {fileID: 5902156723366367464}
 --- !u!1001 &8473078753323376702
 PrefabInstance:

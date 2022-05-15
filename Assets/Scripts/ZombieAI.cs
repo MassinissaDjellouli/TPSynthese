@@ -12,7 +12,7 @@ public class ZombieAI : MonoBehaviour
     private bool isAlive = true;
     private Vector3 capturedPos;
 
-    public Text scoreText;
+    //public Text scoreText;
 
     private Collider collider;
 
@@ -92,7 +92,7 @@ public class ZombieAI : MonoBehaviour
             Object.Destroy(gameObject, 3.0f);
             collider = gameObject.GetComponent<Collider>();
             collider.enabled = false;
-            Menu.score += 10;w
+            Menu.score += 10;
         }
 
 
