@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Gun : MonoBehaviour
 {
     public int RPM = 500;
     public int AMMO_COUNT = 30;
     public int TOTAL_AMMO = 150;
     public Canvas aimingHUD;
-    
+
+    public Text currentAmmoText;
+    public Text totalAmmoText;
+    public Text score;
+
     int currentTotalAmmo;
     int currentAmmo = 0;
     float shootCountDown = 0;
@@ -33,6 +37,9 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        score.text = Menu.score.ToString();
+        currentAmmoText.text = currentAmmo.ToString();
+        totalAmmoText.text = currentTotalAmmo.ToString();
         DestroyOldBullets();
         transform.rotation = transform.rotation; 
         if(shootCountDown > 0)
