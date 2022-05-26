@@ -8899,7 +8899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747184968741348455, guid: 4e22491d1713f5349b6e3652082475f2, type: 3}
       propertyPath: m_Name
-      value: Zombie1
+      value: ZombieTest
       objectReference: {fileID: 0}
     - target: {fileID: 4747184968741348455, guid: 4e22491d1713f5349b6e3652082475f2, type: 3}
       propertyPath: m_IsActive
