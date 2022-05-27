@@ -7,8 +7,7 @@ public class Bullet : MonoBehaviour
     public float movementSpeed = 100;
     Transform canon;
     Vector3 direction;
-    PlayerActions player;
-
+    public bool collided = false;
     public float maxDistance = 2000f;
     public float beginDelay = 1;
     Rigidbody rb;
@@ -38,12 +37,9 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.tag != "Weapon" && collision.gameObject.tag != "Player")
         {
+            collided = true;
         }
 
-        if (collision.gameObject.tag != "Zombie" && collision.gameObject.tag != "Player")
-        {
-
-        }
     }
 
 }

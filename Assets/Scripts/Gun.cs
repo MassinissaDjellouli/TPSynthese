@@ -25,6 +25,9 @@ public class Gun : MonoBehaviour
     public GameObject bullet;
     public Transform canon;
 
+    public AudioSource gunshot;
+    public AudioSource reload;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,8 +71,13 @@ public class Gun : MonoBehaviour
         float maxDistance = 1000;
         for(int i = 0; i < bullets.Count; i++)
         {
-
-            if(getPlayerDistance(bullets[i]) > maxDistance)
+            if (bullets[i].GetComponent<Bullet>().collided)
+            {
+                GameObject bullet = bullets[i];
+                bullets.RemoveAt(i);
+                Destroy(bullet);
+            }
+            if (getPlayerDistance(bullets[i]) > maxDistance)
             {
                 GameObject bullet = bullets[i];
                 bullets.RemoveAt(i);
@@ -107,6 +115,7 @@ public class Gun : MonoBehaviour
             muzzleFlash.startRotation = Random.RandomRange(0, 180);
             muzzleFlash.Play();
         }
+        gunshot.Play();
         bullets.Add(Instantiate(bullet,canon.position,Quaternion.identity));
         Debug.Log("Shootin");
     }
@@ -129,6 +138,7 @@ public class Gun : MonoBehaviour
         StopAim();
         animator.SetTrigger("isReloading");
         currentTotalAmmo -= AMMO_COUNT - currentAmmo;
+        reload.Play();
         currentAmmo = AMMO_COUNT;
     }
     public void Aim()
