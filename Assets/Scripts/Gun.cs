@@ -13,7 +13,7 @@ public class Gun : MonoBehaviour
     public Text totalAmmoText;
     public Text score;
 
-    int currentTotalAmmo;
+    public int currentTotalAmmo;
     int currentAmmo = 0;
     float shootCountDown = 0;
     bool aiming = false;
@@ -95,7 +95,6 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        Debug.Log(animator);
         if (!(animator.GetCurrentAnimatorStateInfo(0).IsName("IdleState") || animator.GetCurrentAnimatorStateInfo(0).IsName("Aiming")))
         {
             return;
@@ -117,7 +116,6 @@ public class Gun : MonoBehaviour
         }
         gunshot.Play();
         bullets.Add(Instantiate(bullet,canon.position,Quaternion.identity));
-        Debug.Log("Shootin");
     }
     public void Reload()
     {
@@ -149,7 +147,6 @@ public class Gun : MonoBehaviour
             GetComponent<MeshRenderer>().enabled = false;
             animator.SetTrigger("isAiming");
             aiming = true;
-            Debug.Log("aimin");
         }
     }
 }

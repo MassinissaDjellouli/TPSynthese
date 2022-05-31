@@ -7,13 +7,15 @@ using UnityEngine.UI;
 public class ZombieAI : MonoBehaviour
 {
     private Animator anim;
+    private int damage = 20;
     private Collider collider;
     private GameObject player;
     private bool isHitting = false;
     private bool isAlive = true;
     private float capturedPos;
     private NavMeshAgent NavMeshAgent;
-
+    public AudioSource sound;
+    public AudioSource death;
     //public Text scoreText;
 
     public int zombieHp = 6;
@@ -27,12 +29,12 @@ public class ZombieAI : MonoBehaviour
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
-
+   
     void Update()
     {
+  
         if (isHitting)
         {
-            Debug.Log("Zombie is hitting the player");
             stopAllAnimation();
             anim.SetBool("Attack", true);
             if (capturedPos != transform.position.x)
@@ -68,28 +70,32 @@ public class ZombieAI : MonoBehaviour
         NavMeshAgent.destination = playerPos;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        //this will never happen because the body identified with TAG Player will never touch the zombie's Collider
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Hit player");
             isHitting = true;
             capturedPos = player.transform.position.x;
+            player.GetComponent<PlayerActions>().Hit(damage);
         }
-        else if (collision.gameObject.tag == "Bullet")
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
         {
-            Debug.Log("Hit gun");
             stopAllAnimation();
             isAlive = false;
+            sound.Stop();
+            death.Play();
             anim.SetBool("isDead", true);
-            Object.Destroy(gameObject, 3.0f);
+            Destroy(gameObject, 4.0f);
+            player.GetComponent<PlayerActions>().GiveLife(damage/4);
             collider = gameObject.GetComponent<Collider>();
             collider.enabled = false;
             Menu.score += 10;
         }
     }
-
 
 
 }
